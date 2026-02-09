@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "@/App.css";
 import { User } from "lucide-react";
-import mockData from "../../data.json";
 
 function App() {
   const [activeTab, setActiveTab] = useState("training");
+  const [mockData, setMockData] = useState(null);
+
+  useEffect(() => {
+    fetch('/data.json')
+      .then(res => res.json())
+      .then(data => setMockData(data))
+      .catch(err => console.error('Error loading data:', err));
+  }, []);
+
+  if (!mockData) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
