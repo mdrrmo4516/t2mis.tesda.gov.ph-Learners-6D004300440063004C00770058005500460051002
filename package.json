@@ -1,0 +1,17 @@
+{
+  "name": "profile-viewer-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Profile viewer single page application",
+  "scripts": {
+    "install": "cd frontend && yarn install",
+    "build": "cd frontend && yarn build",
+    "start": "cd frontend && yarn start",
+    "clean": "rm -rf frontend/build frontend/node_modules/.cache",
+    "build:prod": "yarn clean && cd frontend && yarn build",
+    "preview": "cd frontend/build && python3 -m http.server 5000"
+  },
+  "workspaces": [
+    "frontend"
+  ]
+}
