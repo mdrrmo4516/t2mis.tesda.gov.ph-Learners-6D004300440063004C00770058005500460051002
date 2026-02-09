@@ -5,13 +5,10 @@
   "description": "Profile viewer single page application",
   "scripts": {
     "install": "cd frontend && yarn install",
-    "build": "cd frontend && yarn build",
+    "build": "cd frontend && GENERATE_SOURCEMAP=false yarn build",
     "start": "cd frontend && yarn start",
     "clean": "rm -rf frontend/build frontend/node_modules/.cache",
-    "build:prod": "yarn clean && cd frontend && yarn build",
-    "preview": "cd frontend/build && python3 -m http.server 5000"
-  },
-  "workspaces": [
-    "frontend"
-  ]
+    "build:prod": "yarn clean && cd frontend && GENERATE_SOURCEMAP=false yarn build",
+    "serve": "cd frontend/build && python3 -m http.server 5000"
+  }
 }
