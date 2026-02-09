@@ -48,6 +48,33 @@ const webpackConfig = {
     },
     configure: (webpackConfig) => {
 
+      // Production build optimizations
+      if (process.env.NODE_ENV === 'production') {
+        // Disable source maps for smaller bundle size
+        webpackConfig.devtool = false;
+        
+        // Optimize chunks
+        webpackConfig.optimization = {
+          ...webpackConfig.optimization,
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                priority: 10,
+              },
+              common: {
+                minChunks: 2,
+                priority: 5,
+                reuseExistingChunk: true,
+              },
+            },
+          },
+          runtimeChunk: 'single',
+        };
+      }
+
       // Add ignored patterns to reduce watched directories
         webpackConfig.watchOptions = {
           ...webpackConfig.watchOptions,
